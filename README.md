@@ -29,7 +29,7 @@ The password is 'aswdfzxcbvbhgtyyn'
 
 **Note: Always use this tool responsibly and with proper authorization.**
 
-**Note: For the icon, download the png and place it in your D drive. If the file path is different then you will need to update it in the code (optional)**
+**Note: For the icon, download the png and place it in your D drive. If the file path is different then you will need to update it in the code (not optional)**
 
 ## Disclaimer
 
