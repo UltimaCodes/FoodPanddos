@@ -24,7 +24,7 @@ pip install tkinter
 3. Run the script:
 python Foodpanda.py
 
-4. Enter the password to authenticate and access the attack controls.
+4. Enter the password to authenticate and access the attack controls:
 The password is 'aswdfzxcbvbhgtyyn'
 
 **Note: Always use this tool responsibly and with proper authorization.**
