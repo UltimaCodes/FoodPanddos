@@ -22,7 +22,7 @@ https://github.com/UltimaCodes/FoodPanddos.git
 pip install tkinter
 
 3. Run the script:
-python FoodPanddos.py
+python Foodpanda.py
 
 
 4. Enter the password to authenticate and access the attack controls.
