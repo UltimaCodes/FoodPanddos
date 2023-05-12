@@ -28,6 +28,7 @@ python FoodPanddos.py
 4. Enter the password to authenticate and access the attack controls.
 
 **Note: Always use this tool responsibly and with proper authorization.**
+**Note: For the icon, download the png and place it in your D drive. If the file path is different then you will need to update it in the code (optional)**
 
 ## Disclaimer
 
