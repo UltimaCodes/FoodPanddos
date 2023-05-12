@@ -92,21 +92,9 @@ def generate_payload(payload_type):
 def generate_random_payload():
     payload = bytearray(random.getrandbits(8) for _ in range(1024))
     return payload
-    
+
 def generate_severe_payload(payload_type):
-    payload = bytearray()
-    if payload_type == "Explosive":
-        # Generate an explosive payload
-        for _ in range(1024):
-            payload.append(random.randint(0, 255))
-    elif payload_type == "Virus":
-        # Generate a virus payload
-        for _ in range(1024):
-            payload.append(0x90)
-    elif payload_type == "Worm":
-        # Generate a worm payload
-        for _ in range(1024):
-            payload.append(0xFF)
+    payload = bytearray(payload_type, "utf-8") * 1024
     return payload
 
 def start_attack():
@@ -196,26 +184,20 @@ duration_label.pack()
 duration_entry = tk.Entry(controls_frame, width=10, font=("Arial", 12))
 duration_entry.pack(pady=5)
 
-# Creating a dropdown menu for payload type
-payload_type_label = tk.Label(controls_frame, text="Payload Type:", font=("Arial", 12))
-payload_type_label.pack()
-payload_type_var = tk.StringVar(controls_frame)
-payload_type_var.set("Random")
-payload_type_dropdown = tk.OptionMenu(controls_frame, payload_type_var, "Random", "Explosive", "Virus", "Worm")
-payload_type_dropdown.pack(pady=5)
+# Creating a dropdown for payload type selection
+payload_label = tk.Label(controls_frame, text="Payload Type:", font=("Arial", 12))
+payload_label.pack()
+payload_options = ["Random", "Custom"]
+payload_dropdown = tk.StringVar(controls_frame)
+payload_dropdown.set(payload_options[0])
+payload_menu = tk.OptionMenu(controls_frame, payload_dropdown, *payload_options)
+payload_menu.pack(pady=5)
 
 # Creating a start button to initiate the attack
 start_button = tk.Button(controls_frame, text="Start Attack", command=start_attack, font=("Arial", 12), bg="red", fg="white", padx=10, pady=5)
 start_button.pack()
 
-# Binding the Enter key to start the attack
-window.bind("<Return>", lambda event: start_button.invoke())
-
-start_button.config(command=start_attack)
-start_button.pack(pady=10)
-
 controls_frame.pack(pady=10)
-
 
 # Creating a frame for the attack info
 info_frame = tk.Frame(window)
