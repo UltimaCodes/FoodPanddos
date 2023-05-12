@@ -32,6 +32,10 @@ title_label.pack()
 small_text_label = tk.Label(window, text="Now with express Delivery ;)", font=("Arial", 8))
 small_text_label.pack()
 
+# Creating the signature/copyright name thingy
+small_text_label = tk.Label(window, text="Made by NotRyaan / UltimaCodes", font=("Arial", 6))
+small_text_label.pack()
+
 # User Authentication
 def authenticate(password):
     return password == "aswdfzxcbvbhgtyyn"
