@@ -12,6 +12,7 @@ FoodPanddos is a simple DDoS (Distributed Denial of Service) tool implemented in
 - Customizable attack parameters, including target port, attack duration, and payload type.
 - Real-time display of attack statistics, such as packets sent, attack duration, and packets per second.
 - Target verification to check the availability of a target before launching an attack.
+- Logging of attack statistics to a log file with date and time.
 
 ## Usage
 
@@ -22,7 +23,7 @@ https://github.com/UltimaCodes/FoodPanddos.git
 pip install tkinter
 
 3. Run the script:
-python Foodpanda.py
+python FoodPanddos.py
 
 4. Enter the password to authenticate and access the attack controls:
 The password is 'aswdfzxcbvbhgtyyn'
