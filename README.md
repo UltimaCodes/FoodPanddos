@@ -26,7 +26,7 @@ pip install tkinter
 python FoodPanddos.py
 
 4. Enter the password to authenticate and access the attack controls:
-The password is 'aswdfzxcbvbhgtyyn'
+ aswdfzxcbvbhgtyyn
 
 **Note: Always use this tool responsibly and with proper authorization.**
 
