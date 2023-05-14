@@ -14,7 +14,7 @@ FoodPanddos is a simple DDoS (Distributed Denial of Service) tool implemented in
 - Target verification to check the availability of a target before launching an attack.
 - Logging of attack statistics to a log file with date and time.
 
-## Usage (If downloading the python file, not the release)
+## Usage 
 
 1. Clone the repository:
 https://github.com/UltimaCodes/FoodPanddos.git
