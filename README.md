@@ -21,7 +21,7 @@ https://github.com/UltimaCodes/FoodPanddos.git
 
 2. Install the required dependencies:
 
-$ pip install pillow tk requests
+   $ pip install pillow tk requests
 
 3. Run the script: python FoodPanddos.py
 
