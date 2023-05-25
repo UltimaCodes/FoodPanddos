@@ -4,6 +4,8 @@ import random
 import threading
 import datetime
 import os
+import requests
+from PIL import Image, ImageTk
 
 # This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 # UltimaCodes/NotRyaan 2023
@@ -29,6 +31,28 @@ window.resizable(False, False)
 # Creating a frame for the title
 title_frame = tk.Frame(window)
 title_frame.pack(pady=10)
+
+# Specify the image file path in the Downloads folder of the C drive
+image_filename = "foodpanda.png"
+image_path = os.path.join(os.path.expanduser("~"), "Downloads", image_filename)
+
+# Check if the image file already exists
+if not os.path.isfile(image_path):
+    # Download the image from GitHub
+    image_url = "https://github.com/UltimaCodes/FoodPanddos/raw/7d6ee12c4231244c7c0646a6109740f81a9582ef/foodpanda.png"
+    response = requests.get(image_url)
+    image_data = response.content
+
+    # Save the image locally in the Downloads folder
+    with open(image_path, "wb") as image_file:
+        image_file.write(image_data)
+
+# Open the image and create a Tkinter-compatible photo image
+image = Image.open(image_path)
+photo = ImageTk.PhotoImage(image)
+
+# Set the photo image as the window icon
+window.iconphoto(True, photo)
 
 # Creating a title label
 title_label = tk.Label(title_frame, text="FoodPanddos", font=("Arial", 16, "bold"))
