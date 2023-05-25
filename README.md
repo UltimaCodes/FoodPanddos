@@ -32,9 +32,8 @@ python FoodPanddos.py
 
 **Note: For the icon, download the png and place it in your D drive. If the file path is different then you will need to update it in the code (not optional)**
 
-![image](https://github.com/UltimaCodes/FoodPanddos/assets/86365722/b85061a9-af3b-4fcb-b866-bcdb784b9bfb)
-![image](https://github.com/UltimaCodes/FoodPanddos/assets/86365722/a7d9a25f-05a6-4b2e-9a3f-d120e198bf22)
-
+![image](https://github.com/UltimaCodes/FoodPanddos/assets/86365722/be952fac-7b81-4d0e-9dbc-1ade5ea0a1f7)
+![image](https://github.com/UltimaCodes/FoodPanddos/assets/86365722/0d8059ff-6065-4a76-a92b-6ce15abb5ad3)
 
 ## Disclaimer
 
