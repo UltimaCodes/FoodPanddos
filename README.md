@@ -20,10 +20,10 @@ FoodPanddos is a simple DDoS (Distributed Denial of Service) tool implemented in
 https://github.com/UltimaCodes/FoodPanddos.git
 
 2. Install the required dependencies:
-pip install tkinter
 
-3. Run the script:
-python FoodPanddos.py
+$ pip install pillow tk requests
+
+3. Run the script: python FoodPanddos.py
 
 4. Enter the password to authenticate and access the attack controls:
  aswdfzxcbvbhgtyyn
